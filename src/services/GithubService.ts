@@ -17,7 +17,7 @@ class GithubService implements IGithubService {
    * @returns Promise<any>
    * @memberof GithubService
    */
-  public getCommits = (repoName: string = 'olavoparno/git-commits'): Promise<any> => {
+  public getCommits = (repoName: string): Promise<any> => {
     const path = `https://api.github.com/repos/${repoName}/commits`
     return this.fetchData(path)
   }
@@ -32,12 +32,18 @@ class GithubService implements IGithubService {
   private fetchData = (path: string): Promise<any> => {
     return fetch(path)
       .then(response => {
-        return response.json()
+        if(response.ok) {
+          return response.json()
+        } else {
+          throw Error();
+        }
       })
       .then(data => {
         return data
       })
-      .catch(() => `Error on fetching data for ${path}.`)
+      .catch(() => {
+        console.log(`Error on fetching data for ${path}.`)
+      })
   }
 }
 

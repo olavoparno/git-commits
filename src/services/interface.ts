@@ -34,6 +34,8 @@ export interface IAuthor {
 export interface IAllCommits {
   commits: ICommits[];
   isLoading: boolean;
+  validRepo: boolean;
+  currentRepo: string;
 }
 
 export interface IGithubService {

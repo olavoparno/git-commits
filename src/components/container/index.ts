@@ -11,22 +11,36 @@ class AppContainer extends Container<IAllCommits> {
     this.state = {
       commits: this.fetchCommits(),
       isLoading: true,
+      validRepo: false,
+      currentRepo: 'Repository name',
     }
   }
 
   service: GithubService = new GithubService()
 
-  fetchCommits(): any {
+  fetchCommits(repoName: string = 'olavoparno/git-commits'): any {
+    this.setState({
+      isLoading: true,
+    })
     this.service
-      .getCommits()
+      .getCommits(repoName)
       .then((commits: any) => {
         const modeledCommits = Object.values(commits).map((commit: any) => {
           return shapeCommits(commit)
         })
-
         this.setState({
           commits: modeledCommits,
-          isLoading: !this.state.isLoading,
+          isLoading: false,
+          validRepo: true,
+          currentRepo: repoName,
+        })
+      })
+      .catch(() => {
+        this.setState({
+          commits: [],
+          isLoading: false,
+          validRepo: false,
+          currentRepo: 'Repository name',
         })
       })
   }
