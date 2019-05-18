@@ -9,7 +9,8 @@ class AppContainer extends Container<IAllCommits> {
     super()
 
     this.state = {
-      commits: []
+      commits: this.fetchCommits(),
+      isLoading: true,
     }
   }
 
@@ -23,11 +24,10 @@ class AppContainer extends Container<IAllCommits> {
           return shapeCommits(commit)
         })
 
-        console.log('Modeled commits', modeledCommits);
-
-        // this.setState({
-        //   commits: newCommits,
-        // })
+        this.setState({
+          commits: modeledCommits,
+          isLoading: !this.state.isLoading,
+        })
       })
   }
 }

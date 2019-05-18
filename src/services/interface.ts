@@ -32,7 +32,8 @@ export interface IAuthor {
 }
 
 export interface IAllCommits {
-  commits: ICommits[]
+  commits: ICommits[];
+  isLoading: boolean;
 }
 
 export interface IGithubService {

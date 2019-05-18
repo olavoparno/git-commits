@@ -11,10 +11,14 @@ function App(): JSX.Element {
       <Subscribe to={[AppContainer]}>
       {
         (container: AppContainer) => {
-          return (
+          return !container.state.isLoading ? (
             <div className="app-container">
-              {container.fetchCommits()}
+              {console.log('State', container.state.commits)}
+              sasa
             </div>
+          ) :
+          (
+            <h1>Loading...</h1>
           )
         }
       }
