@@ -10,21 +10,15 @@ import { IGithubService } from './interface'
  * @implements {GithubService}
  */
 class GithubService implements IGithubService {
-  repoPath: string = ""
-
-  constructor(repoPath = "olavoparno/git-commits") {
-    this.repoPath = repoPath;
-  }
-
   /**
    * Public getCommits method
    *
-   * @param {string} path - Endpoint URL used by the fetch method
+   * @param {string} repoName - Repository name
    * @returns Promise<any>
    * @memberof GithubService
    */
-  public getCommits = (): Promise<any> => {
-    const path = `https://api.github.com/repos/${this.repoPath}/commits`
+  public getCommits = (repoName: string = 'olavoparno/git-commits'): Promise<any> => {
+    const path = `https://api.github.com/repos/${repoName}/commits`
     return this.fetchData(path)
   }
 
