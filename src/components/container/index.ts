@@ -28,8 +28,11 @@ class AppContainer extends Container<IAllCommits> {
         const modeledCommits = Object.values(commits).map((commit: any) => {
           return shapeCommits(commit)
         })
+
+        const shortenedCommits = modeledCommits.slice(0, 20)
+
         this.setState({
-          commits: modeledCommits,
+          commits: shortenedCommits,
           isLoading: false,
           validRepo: true,
           currentRepo: repoName,
