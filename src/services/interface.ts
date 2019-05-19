@@ -1,5 +1,5 @@
 /**
- * Typings for Commit object
+ * Typings for Commit State object
  * @interface ICommit
  */
 export interface ICommits {
@@ -8,6 +8,19 @@ export interface ICommits {
   friendlyUrl: string
 }
 
+/**
+ * Typings for Branch object
+ * @interface IBranches
+ */
+export interface IBranches {
+  value: string;
+  label: string;
+}
+
+/**
+ * Typings for Commit object
+ * @interface ICommit
+ */
 export interface ICommit {
   author: ISimpleAuthor;
   message: string;
@@ -15,12 +28,20 @@ export interface ICommit {
   commentsCount: number;
 }
 
+/**
+ * Typings for Commit Author object
+ * @interface ISimpleAuthor
+ */
 export interface ISimpleAuthor {
   name: string;
   email: string;
   date: string;
 }
 
+/**
+ * Typings for Big Author object
+ * @interface IAuthor
+ */
 export interface IAuthor {
   id: number;
   login: string;
@@ -31,13 +52,24 @@ export interface IAuthor {
   starredUrl: string;
 }
 
+/**
+ * Typings for State object
+ * @interface IAllCommits
+ */
 export interface IAllCommits {
+  branches: IBranches[];
   commits: ICommits[];
   isLoading: boolean;
   validRepo: boolean;
   currentRepo: string;
+  selectedBranch: IBranches;
 }
 
+/**
+ * Typings for Github service
+ * @interface IGithubService
+ */
 export interface IGithubService {
-
+  getBranches: (repoName: string) => Promise<any>
+  getCommits: (repoName: string, branch?: string) => Promise<any>
 }

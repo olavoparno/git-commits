@@ -1,7 +1,7 @@
 import { IGithubService } from './interface'
 
 /**
- * This class fetchs travelling information
+ * This class fetchs commits information
  * @example
  * const service = new GithubService()
  * const commits = service.getCommits()
@@ -11,13 +11,25 @@ import { IGithubService } from './interface'
  */
 class GithubService implements IGithubService {
   /**
+   * Public getBranches method
+   *
+   * @param {string} repoName - Repository name
+   * @returns Promise<any> of repository branches
+   * @memberof GithubService
+   */
+  public getBranches = (repoName: string): Promise<any> => {
+    const path = `https://api.github.com/repos/${repoName}/branches`
+    return this.fetchData(path)
+  }
+
+  /**
    * Public getCommits method
    *
    * @param {string} repoName - Repository name
-   * @returns Promise<any>
+   * @returns Promise<any> of repository commits
    * @memberof GithubService
    */
-  public getCommits = (repoName: string): Promise<any> => {
+  public getCommits = (repoName: string, branch?: string): Promise<any> => {
     const path = `https://api.github.com/repos/${repoName}/commits`
     return this.fetchData(path)
   }

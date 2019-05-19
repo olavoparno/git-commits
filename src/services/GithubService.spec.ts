@@ -1,30 +1,27 @@
-import {GlobalWithFetchMock} from "jest-fetch-mock"
+// import {GlobalWithFetchMock} from "jest-fetch-mock"
 
-import TravelService from './index'
-import { ICity, IWeather, ICondition } from './interface'
-import Config from '@Config/index'
-import Mock from '@Mock/index'
+import GithubService from 'services/GithubService'
 
-let service: TravelService
-let customGlobal: GlobalWithFetchMock
-let serviceFail: TravelService
+let service: GithubService
+// let customGlobal: GlobalWithFetchMock
+let serviceFail: GithubService
 
-describe('Test for TravelService class failures', () => {
+describe('Test for GithubService class failures', () => {
   beforeAll(() => {
-    serviceFail = new TravelService()
+    serviceFail = new GithubService()
   })
-  it('should throw an error', done => {
-    const wrongConfig = {
-      id: '123456',
-      year: '2018'
-    }
-    serviceFail
-      .getConditions(wrongConfig.id, wrongConfig.year)
-      .then((response: any) => {
-        expect(response).toEqual(
-          `Error on fetching data for ${Config.api.baseUrl}/cities/${wrongConfig.id}/year/${wrongConfig.year}/.`
-        )
-        done()
-      })
-    })
+  // it('should throw an error', done => {
+  //   const wrongConfig = {
+  //     id: '123456',
+  //     year: '2018'
+  //   }
+  //   serviceFail
+  //     .getBranches(wrongConfig.id, wrongConfig.year)
+  //     .then((response: any) => {
+  //       expect(response).toEqual(
+  //         `Error on fetching data for ${Config.api.baseUrl}/cities/${wrongConfig.id}/year/${wrongConfig.year}/.`
+  //       )
+  //       done()
+  //     })
+  //   })
 })
