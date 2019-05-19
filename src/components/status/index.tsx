@@ -1,8 +1,10 @@
 import React from 'react'
 
-const Status = ({text = ''}) => {
+const Status = ({text = 'Default Display Text', className = 'status-display'}) => {
   return (
-    <h1>{text}</h1>
+    <div className={className}>
+      <h1>{text}</h1>
+    </div>
   )
 }
 
