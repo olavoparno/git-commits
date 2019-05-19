@@ -1,8 +1,9 @@
-import { ICommits } from "services/interface";
+import { ICommits, IBranches } from "services/interface"
 
 const shapeCommits = (props: any): ICommits => {
-  const { author, commit } = props;
-  
+  const { author, commit } = props
+  const formattedDate = new Date(commit.author.date).toDateString()
+
   const returnCommit = {
     author: {
       avatarUrl: author && author.avatar_url,
@@ -16,7 +17,7 @@ const shapeCommits = (props: any): ICommits => {
     commit: {
       author: commit && {
         name: commit.author.name,
-        date: commit.author.date,
+        date: formattedDate,
         email: commit.author.email,
       },
       commentsCount: commit && commit.comments_count,
@@ -29,4 +30,15 @@ const shapeCommits = (props: any): ICommits => {
   return returnCommit
 }
 
-export default shapeCommits
+const shapeBranches = (props: any): IBranches => {
+  const { name, commit } = props
+
+  const returnBranch = {
+    value: commit.url,
+    label: name,
+  }
+
+  return returnBranch
+}
+
+export default { shapeCommits, shapeBranches }

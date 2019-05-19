@@ -8,7 +8,14 @@ body {
 
 .status-display {
   padding: 0.5rem;
-  border: 0.5px solid rgba(253, 236, 193, 1);
+  border-bottom: 0.5px solid rgba(253, 236, 193, 1);
+  margin: 8px;
+  h1 {
+    font-size: 1.5rem;
+    @media (min-width: 767px) {
+      font-size: 2rem;
+    }
+  }
 }
 
 .app-container {
@@ -17,11 +24,51 @@ body {
   flex-direction: column;
   background-color: rgba(247, 247, 247, 0.8);
   border: 0.5px solid rgba(253, 236, 193, 1);
-  .repo-input {
-    margin: 0.5rem 0;
-    padding: 0.5rem;
+  .repo-man {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    align-items: center;
+  }
+  .repo-div, .search-div {
+    margin: 0.5rem 0.5rem;
+    .repo-input {
+      margin: 0;
+      padding: 0.5rem 0;
+      width: 8rem;
+      @media (min-width: 767px) {
+        margin: 0.5rem 0 0.5rem 0.5rem;
+        padding: 0.5rem;
+      }
+    }
+    label {
+      font-size: 0.8rem;
+      margin: 0 0.5rem 0.5rem 0;
+      display: block;
+      @media (min-width: 767px) {
+        display: inline;        
+        font-size: 1rem;
+        margin: 0 0.5rem 0 0;
+      }
+    }
+  }
+  .combo-div {
+    flex-grow: 0.5;
+    font-size: 0.5rem;
+    width: 100%;
+    svg {
+      width: 10px;
+      height: 10px;
+    }
+    @media (min-width: 767px) {
+      font-size: 1rem;
+      width: unset;
+    }
   }
   .ReactTable {
     padding: 0.5rem;
+    .rt-tbody .rt-td {
+      padding: 0.5rem 0.5rem 0 0.5rem;
+    }
   }
 }
