@@ -47,15 +47,13 @@ class GithubService implements IGithubService {
         if (response.ok) {
           return response.json()
         } else {
-          throw Error();
+          throw Error(`Cannot fetch data for ${path}.`);
         }
       })
       .then(data => {
         return data
       })
-      .catch(() => {
-        console.log(`Error on fetching data for ${path}.`)
-      })
+      .catch(() => `Cannot fetch data for ${path}.`)
   }
 }
 

@@ -1,27 +1,41 @@
-// import {GlobalWithFetchMock} from "jest-fetch-mock"
-
 import GithubService from 'services/GithubService'
 
 let service: GithubService
-// let customGlobal: GlobalWithFetchMock
 let serviceFail: GithubService
 
 describe('Test for GithubService class failures', () => {
   beforeAll(() => {
     serviceFail = new GithubService()
   })
-  // it('should throw an error', done => {
-  //   const wrongConfig = {
-  //     id: '123456',
-  //     year: '2018'
-  //   }
-  //   serviceFail
-  //     .getBranches(wrongConfig.id, wrongConfig.year)
-  //     .then((response: any) => {
-  //       expect(response).toEqual(
-  //         `Error on fetching data for ${Config.api.baseUrl}/cities/${wrongConfig.id}/year/${wrongConfig.year}/.`
-  //       )
-  //       done()
-  //     })
-  //   })
+  it('should throw an error', async () => {
+    const wrongRepoName = 'SalamanderXabuDeilson'
+    const response = await serviceFail.getBranches(wrongRepoName)
+    
+    expect(response).toEqual('Cannot fetch data for https://api.github.com/repos/SalamanderXabuDeilson/branches.')
+    })
+})
+
+describe('Test for GithubService class resolution', () => {
+  beforeAll(() => {
+    service = new GithubService()
+  })
+
+  it('should return repo branches', done => {
+    const fakeRepoName = 'olavoparno/git-commits'
+    const fakeBranches = [{
+      name: "master",
+      commit: {
+        sha: "76026c571f81886717503d5ab0e656b0fdbcd7cc",
+        url: "https://api.github.com/repos/olavoparno/git-commits/commits/76026c571f81886717503d5ab0e656b0fdbcd7cc",
+      },
+      protected: false,
+    }]
+
+    service
+      .getBranches(fakeRepoName)
+      .then((response: any) => {
+        expect(response).toEqual(fakeBranches)
+        done()
+      })
+  })
 })
