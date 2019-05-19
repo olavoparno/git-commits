@@ -1,7 +1,7 @@
 import { Container } from "unstated"
 
-import { IAllCommits } from '../../services/interface'
 import GithubService from '../../services/GithubService'
+import { IAllCommits } from '../../services/interface'
 import Model from "../../model";
 
 class AppContainer extends Container<IAllCommits> {
@@ -9,14 +9,14 @@ class AppContainer extends Container<IAllCommits> {
     super()
 
     this.state = {
+      currentRepo: 'Repository name',
       branches: [],
       commits: [],
       isLoading: true,
       validRepo: false,
-      currentRepo: 'Repository name',
       selectedBranch: {
-        value: '',
         label: 'All Commits',
+        value: '',
       }
     }
 
