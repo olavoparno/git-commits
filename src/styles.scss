@@ -1,5 +1,27 @@
 html,
 body {
-  background-color: papayawhip;
+  background-color: white;
   font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.status-display {
+  padding: 0.5rem;
+  border: 0.5px solid rgba(253, 236, 193, 1);
+}
+
+.app-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(247, 247, 247, 0.8);
+  border: 0.5px solid rgba(253, 236, 193, 1);
+  .repo-input {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+  }
+  .ReactTable {
+    padding: 0.5rem;
+  }
 }
