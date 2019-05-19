@@ -26,7 +26,7 @@ function App(): JSX.Element {
               {console.log('State', container.state)}
               <Status
                 className="status-display"
-                text={`${(container.state.validRepo ? 'Current Repository:' : 'Invalid Repository:')} container.state.currentRepo`}
+                text={`${(container.state.validRepo ? 'Current Repository:' : 'Invalid Repository:')} ${container.state.currentRepo}`}
               />
               <DebounceInput
                 minLength={2}
