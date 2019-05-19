@@ -17,7 +17,7 @@ function App(): JSX.Element {
       container.fetchBranches(newRepo)
     }
   }
-  const handleSearchChange  = (e: any, container: AppContainer) => {
+  const handleSearchChange = (e: any, container: AppContainer) => {
     const searchValue = e.target.value
     const filteredCommits = container.state.commits
     filteredCommits.filter((item: ICommits) => {
@@ -31,58 +31,58 @@ function App(): JSX.Element {
   return (
     <Provider>
       <Subscribe to={[AppContainer]}>
-      {
-        (container: AppContainer) => {
-          return !container.state.isLoading ? (
-            <div className="app-container">
-              {console.log('State', container.state)}
-              <Status
-                className="status-display"
-                text={`${(container.state.validRepo ? 'Current Repository:' : 'Invalid Repository:')} ${container.state.currentRepo}`}
-              />
-              <div className="repo-man">
-                <Input
-                  container={container}
-                  label="Repository Name"
-                  className="repo-div"
-                  debounce={1000}
-                  placeHolder={container.state.currentRepo}
-                  onChange={(event: Event) => handleChange(event, container)}
+        {
+          (container: AppContainer) => {
+            return !container.state.isLoading ? (
+              <div className="app-container">
+                {console.log('State', container.state)}
+                <Status
+                  className="status-display"
+                  text={`${(container.state.validRepo ? 'Current Repository:' : 'Invalid Repository:')} ${container.state.currentRepo}`}
                 />
-                <Input
-                  container={container}
-                  label="Search Commit"
-                  className="search-div"
-                  debounce={1000}
-                  placeHolder={container.state.currentRepo}
-                  onChange={(event: Event) => handleSearchChange(event, container)}
-                />
-              </div>
-              <Table
-                data={container.state.commits}
-                getTdProps={(rowInfo: any, column: any) => {
-                  return {
-                    onClick: (e: Event, handleOriginal: any) => {
-                      console.log('it produced this event:', e.target)
-                      console.log('It was in this column:', column)
-                      console.log('It was in this row:', rowInfo)
-                      if (handleOriginal) {
-                        // handleOriginal()
+                <div className="repo-man">
+                  <Input
+                    container={container}
+                    label="Repository Name"
+                    className="repo-div"
+                    debounce={1000}
+                    placeHolder={container.state.currentRepo}
+                    onChange={(event: Event) => handleChange(event, container)}
+                  />
+                  <Input
+                    container={container}
+                    label="Search Commit"
+                    className="search-div"
+                    debounce={1000}
+                    placeHolder={container.state.currentRepo}
+                    onChange={(event: Event) => handleSearchChange(event, container)}
+                  />
+                </div>
+                <Table
+                  data={container.state.commits}
+                  getTdProps={(rowInfo: any, column: any) => {
+                    return {
+                      onClick: (e: Event, handleOriginal: any) => {
+                        console.log('it produced this event:', e.target)
+                        console.log('It was in this column:', column)
+                        console.log('It was in this row:', rowInfo)
+                        if (handleOriginal) {
+                          // handleOriginal()
+                        }
                       }
                     }
-                  }
-                }}
-              />
-            </div>
-          ) :
-          (
-            <Status
-              className="status-display"
-              text={'Loading...'}
-            />
-          )
+                  }}
+                />
+              </div>
+            ) :
+              (
+                <Status
+                  className="status-display"
+                  text={'Loading...'}
+                />
+              )
+          }
         }
-      }
       </Subscribe>
     </Provider>
   );

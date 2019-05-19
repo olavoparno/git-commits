@@ -44,7 +44,7 @@ class GithubService implements IGithubService {
   private fetchData = (path: string): Promise<any> => {
     return fetch(path)
       .then(response => {
-        if(response.ok) {
+        if (response.ok) {
           return response.json()
         } else {
           throw Error();
