@@ -40,7 +40,7 @@ class AppContainer extends Container<IAllCommits> {
           commits: [],
           isLoading: false,
           validRepo: false,
-          currentRepo: 'Repository name',
+          currentRepo: repoName,
         })
       })
   }

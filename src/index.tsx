@@ -4,6 +4,7 @@ import { Provider, Subscribe } from 'unstated'
 import { DebounceInput } from 'react-debounce-input';
 
 import AppContainer from 'components/container'
+import Status from 'components/status'
 import "./styles.scss";
 
 function App(): JSX.Element {
@@ -17,9 +18,11 @@ function App(): JSX.Element {
       {
         (container: AppContainer) => {
           return !container.state.isLoading ? (
-            container.state.validRepo ? (
             <div className="app-container">
             {console.log('State', container.state)}
+            <Status
+              text={(container.state.validRepo ? 'Current Repository: ' : 'Invalid Repository: ') + container.state.currentRepo}
+            />
             <DebounceInput
               minLength={2}
               debounceTimeout={800}
@@ -27,12 +30,11 @@ function App(): JSX.Element {
               className="repo-input"
               onChange={event => handleChange(event, container)} />
             </div>
-            ) : (
-              <h1>Invalid Repo</h1>
-            )
           ) :
           (
-            <h1>Loading...</h1>
+            <Status
+              text={'Loading...'}
+            />
           )
         }
       }
