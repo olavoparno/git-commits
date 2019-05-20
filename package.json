@@ -1,8 +1,11 @@
 {
   "name": "git-commits",
   "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "description": "Surf through Git Commits from a specific repository",
+  "keywords": [
+    "git",
+    "reactjs"
+  ],
   "main": "src/index.tsx",
   "dependencies": {
     "react": "^16.8.6",
@@ -21,6 +24,7 @@
     "@types/react-dom": "^16.8.4",
     "@types/react-select": "^2.0.18",
     "@types/react-table": "^6.8.1",
+    "conventional-changelog-cli": "^2.0.21",
     "node-sass": "^4.12.0",
     "prettier": "1.17.1",
     "tslint": "^5.16.0",
@@ -38,7 +42,8 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "docs": "npm run make-badges && typedoc --out docs --target es6 --readme README.md --theme minimal --mode file src",
     "build-badges": "node_modules/.bin/jest-badges-readme",
-    "make-badges": "npm run build-badges"
+    "make-badges": "npm run build-badges",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "browserslist": {
     "production": [
