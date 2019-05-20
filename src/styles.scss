@@ -56,6 +56,12 @@ body {
   }
   .search-div {
     margin: 0.5rem 0 0 0.5rem;
+    .repo-input {
+      margin: 0 0 1rem;
+      @media (min-width: 767px) {
+        margin: 0.5rem 0 0.5rem 0.5rem;
+      }
+    }
     
   }
   .combo-div {

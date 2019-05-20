@@ -1,7 +1,7 @@
 import { Container } from 'unstated'
 
 import GithubService from '../../services/GithubService'
-import { IAllCommits } from '../../services/interface'
+import { IAllCommits, ICommits } from '../../services/interface'
 import Model from '../../model';
 
 class AppContainer extends Container<IAllCommits> {
@@ -31,7 +31,7 @@ class AppContainer extends Container<IAllCommits> {
 
   service: GithubService = new GithubService()
 
-  public fetchBranches(repoName: string): any {
+  public fetchBranches = (repoName: string): any => {
     this.tiltLoading(true)
     this.service
       .getBranches(repoName)
@@ -65,7 +65,7 @@ class AppContainer extends Container<IAllCommits> {
       })
   }
 
-  public fetchCommits(repoName: string): any {
+  public fetchCommits = (repoName: string): any => {
     this.tiltLoading(true)
     this.service
       .getCommits(repoName)
@@ -115,7 +115,13 @@ class AppContainer extends Container<IAllCommits> {
       .finally(() => {
         this.tiltLoading(false)
       })
-  } 
+  }
+
+  setCommits = (commits: ICommits[]) => {
+    return this.setState({
+      commits,
+    })
+  }
 
   private tiltLoading = (value: boolean) => {
     this.setState({

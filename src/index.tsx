@@ -24,18 +24,15 @@ function App(): JSX.Element {
 
     if (searchValue.length === 0) {
       const oldCommits = container.state.lastCommits
-      await container.setState({
-        commits: oldCommits,
-      })
+
+      await container.setCommits(oldCommits)
     }
 
     const filteredCommits = container.state.commits.filter((item: ICommits) => {
       return item.commit.message.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
     })
 
-    container.setState({
-      commits: filteredCommits
-    })
+    await container.setCommits(filteredCommits)
   }
   const handleRepoChange = async (e: any, container: AppContainer) => {
     await container.fetchBranches(e.label)
@@ -70,7 +67,7 @@ function App(): JSX.Element {
                   />
                   <Input
                     container={container}
-                    label="Search Commit"
+                    label="Search Commit Message"
                     className="search-div"
                     debounce={1000}
                     placeHolder={"e.g. refactor"}
@@ -82,12 +79,13 @@ function App(): JSX.Element {
                   getTdProps={(rowInfo: any, column: any) => {
                     return {
                       onClick: (e: Event, handleOriginal: any) => {
-                        console.log('it produced this event:', e.target)
-                        console.log('It was in this column:', column)
-                        console.log('It was in this row:', rowInfo)
-                        if (handleOriginal) {
-                          // handleOriginal()
-                        }
+                        // console.log('it produced this event:', e.target)
+                        // console.log('It was in this column:', column)
+                        // console.log('It was in this row:', rowInfo)
+                        // if (handleOriginal) {
+                        //   // handleOriginal()
+                        // }
+                        // I wanted to show more info with a popup or something
                       }
                     }
                   }}
