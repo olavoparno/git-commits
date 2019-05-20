@@ -18,6 +18,15 @@ export interface IBranches {
 }
 
 /**
+ * Typings for Repository object
+ * @interface IRepos
+ */
+export interface IRepos {
+  label: string;
+  value: string;
+}
+
+/**
  * Typings for Commit object
  * @interface ICommit
  */
@@ -59,10 +68,13 @@ export interface IAuthor {
 export interface IAllCommits {
   branches: IBranches[];
   commits: ICommits[];
+  currentRepo: IRepos;
+  lastCommits: ICommits[];
   isLoading: boolean;
-  validRepo: boolean;
-  currentRepo: string;
   selectedBranch: IBranches;
+  userName: string;
+  userRepos: IRepos[];
+  validRepo: boolean;
 }
 
 /**

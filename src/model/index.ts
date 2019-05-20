@@ -1,4 +1,4 @@
-import { ICommits, IBranches } from "services/interface"
+import { ICommits, IBranches, IRepos } from 'services/interface'
 
 const shapeCommits = (props: any): ICommits => {
   const { author, commit } = props
@@ -41,4 +41,15 @@ const shapeBranches = (props: any): IBranches => {
   return returnBranch
 }
 
-export default { shapeCommits, shapeBranches }
+const shapeRepos = (props: any): IRepos => {
+  const { full_name, commits_url } = props
+
+  const returnRepo = {
+    label: full_name,
+    value: commits_url,
+  }
+
+  return returnRepo
+}
+
+export default { shapeCommits, shapeBranches, shapeRepos }

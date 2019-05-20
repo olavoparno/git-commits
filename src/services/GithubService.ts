@@ -29,8 +29,20 @@ class GithubService implements IGithubService {
    * @returns Promise<any> of repository commits
    * @memberof GithubService
    */
-  public getCommits = (repoName: string, branch?: string): Promise<any> => {
+  public getCommits = (repoName: string): Promise<any> => {
     const path = `https://api.github.com/repos/${repoName}/commits`
+    return this.fetchData(path)
+  }
+
+   /**
+   * Public getRepos method
+   *
+   * @param {string} userName - Username
+   * @returns Promise<any> of user repositories
+   * @memberof GithubService
+   */
+  public getRepos = (userName: string): Promise<any> => {
+    const path = `https://api.github.com/users/${userName}/repos`
     return this.fetchData(path)
   }
 

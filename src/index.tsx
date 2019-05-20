@@ -1,32 +1,44 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 import { Provider, Subscribe } from 'unstated'
 
+import { ICommits } from 'services/interface';
+
 import AppContainer from 'components/container'
+import Combo from 'components/combobox'
+import Input from 'components/input'
 import Status from 'components/status'
 import Table from 'components/table'
-import Input from 'components/input'
 
-import "./styles.scss";
-import { ICommits } from "services/interface";
+import './styles.scss';
 
 function App(): JSX.Element {
   const handleChange = (e: any, container: AppContainer) => {
-    const newRepo = e.target.value
-    if (newRepo && newRepo.length) {
-      container.fetchBranches(newRepo)
+    const newUser = e.target.value
+    if (newUser && newUser.length) {
+      container.fetchRepos(newUser)
     }
   }
-  const handleSearchChange = (e: any, container: AppContainer) => {
+  const handleSearchChange = async (e: any, container: AppContainer) => {
     const searchValue = e.target.value
-    const filteredCommits = container.state.commits
-    filteredCommits.filter((item: ICommits) => {
+
+    if (searchValue.length === 0) {
+      const oldCommits = container.state.lastCommits
+      await container.setState({
+        commits: oldCommits,
+      })
+    }
+    
+    const filteredCommits = container.state.commits.filter((item: ICommits) => {
       return item.commit.message.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
     })
-    console.log(filteredCommits);
+    
     container.setState({
       commits: filteredCommits
     })
+  }
+  const handleRepoChange = async (e: any, container: AppContainer) => {
+    await container.fetchBranches(e.label)
   }
   return (
     <Provider>
@@ -38,23 +50,30 @@ function App(): JSX.Element {
                 {console.log('State', container.state)}
                 <Status
                   className="status-display"
-                  text={`${(container.state.validRepo ? 'Current Repository:' : 'Invalid Repository:')} ${container.state.currentRepo}`}
+                  text={`${(container.state.validRepo ? 'Current Repository:' : 'Invalid Repository:')} ${container.state.currentRepo.label}`}
+                />
+                <Input
+                  container={container}
+                  label="Username"
+                  className="repo-div"
+                  debounce={1000}
+                  placeHolder={container.state.userName}
+                  onChange={(event: Event) => handleChange(event, container)}
                 />
                 <div className="repo-man">
-                  <Input
-                    container={container}
-                    label="Repository Name"
-                    className="repo-div"
-                    debounce={1000}
-                    placeHolder={container.state.currentRepo}
-                    onChange={(event: Event) => handleChange(event, container)}
+                  <Combo
+                    label="Repositories"
+                    className="combo-div"
+                    value={container.state.currentRepo}
+                    onChange={(event: Event) => handleRepoChange(event, container)}
+                    options={container.state.userRepos}
                   />
                   <Input
                     container={container}
                     label="Search Commit"
                     className="search-div"
                     debounce={1000}
-                    placeHolder={container.state.currentRepo}
+                    placeHolder={"e.g. refactor"}
                     onChange={(event: Event) => handleSearchChange(event, container)}
                   />
                 </div>
