@@ -25,5 +25,6 @@
 * TypeDoc declarations throughout the project
 * Better componentization definition
 * Decentralization of styles either with continued SCSS usage or with styled-components
+* Add display functionalities when clicking the commit
 
 
