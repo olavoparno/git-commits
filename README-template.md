@@ -13,7 +13,7 @@
 * A test for a Front-End job application and a sheer desire to learn more and more everyday
 
 ## Online Demo
-Click here to preview -> [Git Commits Surfer](https://infallible-tesla-d939f4.netlify.com/)
+* Click here to preview -> [Git Commits Surfer](https://infallible-tesla-d939f4.netlify.com/)
 
 ### Setup Development Environment
 1. Clone the project from https://github.com/olavoparno/git-commits.git
@@ -41,5 +41,5 @@ Click here to preview -> [Git Commits Surfer](https://infallible-tesla-d939f4.ne
 * Better componentization definition
 * Decentralization of styles either with continued SCSS usage or with styled-components
 * Add display functionalities when clicking the commit
-
+* Implement unit tests for React Components and Github service
 
