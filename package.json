@@ -37,7 +37,7 @@
     "prebuild": "rimraf build && echo nok > .buildstatus",
     "postbuild": "npm run test && echo ok > .buildstatus && npm run docs",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom --watchAll --coverage",
+    "test": "react-scripts test --env=jsdom --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "docs": "npm run make-badges && typedoc --out docs --target es6 --readme README.md --theme minimal --mode file src",
