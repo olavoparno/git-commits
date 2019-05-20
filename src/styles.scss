@@ -50,6 +50,9 @@ body {
         margin: 0 0.5rem 0 0;
       }
     }
+    @media (min-width: 767px) {
+      margin: 0 0.5rem 0;
+    }
   }
   .combo-div {
     flex-grow: 0.5;
@@ -89,6 +92,17 @@ body {
     margin: 8px;
     .rt-tbody .rt-td {
       padding: 0.5rem 0.5rem 0 0.5rem;
+    }
+    button {
+      background-color: #555555;
+      border: none;
+      color: white;
+      padding: 0 2px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
     }
   }
 }

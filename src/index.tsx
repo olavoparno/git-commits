@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider, Subscribe } from 'unstated'
 
@@ -28,11 +28,11 @@ function App(): JSX.Element {
         commits: oldCommits,
       })
     }
-    
+
     const filteredCommits = container.state.commits.filter((item: ICommits) => {
       return item.commit.message.toLowerCase().indexOf(searchValue.toLowerCase()) > -1
     })
-    
+
     container.setState({
       commits: filteredCommits
     })
@@ -45,9 +45,9 @@ function App(): JSX.Element {
       <Subscribe to={[AppContainer]}>
         {
           (container: AppContainer) => {
-            return !container.state.isLoading ? (
+            const isLoading = container.state.isLoading && container.state.currentRepo.label === ''
+            return !isLoading ? (
               <div className="app-container">
-                {console.log('State', container.state)}
                 <Status
                   className="status-display"
                   text={`${(container.state.validRepo ? 'Current Repository:' : 'Invalid Repository:')} ${container.state.currentRepo.label}`}
@@ -65,8 +65,8 @@ function App(): JSX.Element {
                     label="Repositories"
                     className="combo-div"
                     value={container.state.currentRepo}
-                    onChange={(event: Event) => handleRepoChange(event, container)}
                     options={container.state.userRepos}
+                    onChange={(event: Event) => handleRepoChange(event, container)}
                   />
                   <Input
                     container={container}

@@ -21,6 +21,7 @@ const Table = ({ data, getTdProps }: any) => {
     }, {
       Header: 'Message',
       accessor: 'commit.message',
+      Cell: (props: any) => <span><b>{props.value}</b></span>,
       minWidth: 200,
       maxWidth: 460,
     }, {
@@ -31,7 +32,7 @@ const Table = ({ data, getTdProps }: any) => {
     }, {
       Header: 'Url',
       accessor: 'friendlyUrl',
-      Cell: (props: any) => <a href={props.value} rel='noopener noreferrer' target='_blank' className='number'>{props.value}</a>
+      Cell: (props: any) => <button onClick={() => props.value} className='number'>{props.value}</button>
     }
   ]
 

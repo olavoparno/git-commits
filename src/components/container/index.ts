@@ -12,28 +12,26 @@ class AppContainer extends Container<IAllCommits> {
       branches: [],
       commits: [],
       currentRepo: {
-        label: 'Repository name',
+        label: '',
         value: '',
       },
       lastCommits: [],
-      isLoading: true,
+      isLoading: false,
       selectedBranch: {
         label: 'All Commits',
         value: '',
       },
-      userName: 'olavoparno',
+      userName: 'reactjs',
       userRepos: [],
       validRepo: false,
     }
 
     this.fetchRepos()
-    this.fetchBranches()
   }
 
-  defaultRepo: string = 'olavoparno/git-commits'
   service: GithubService = new GithubService()
 
-  public fetchBranches(repoName: string = this.defaultRepo): any {
+  public fetchBranches(repoName: string): any {
     this.tiltLoading(true)
     this.service
       .getBranches(repoName)
@@ -62,10 +60,12 @@ class AppContainer extends Container<IAllCommits> {
           validRepo: false,
         })
       })
-    this.tiltLoading(false)
+      .finally(() => {
+        this.tiltLoading(false)
+      })
   }
 
-  public fetchCommits(repoName: string = this.defaultRepo): any {
+  public fetchCommits(repoName: string): any {
     this.tiltLoading(true)
     this.service
       .getCommits(repoName)
@@ -89,7 +89,9 @@ class AppContainer extends Container<IAllCommits> {
           validRepo: false,
         })
       })
-    this.tiltLoading(false)
+      .finally(() => {
+        this.tiltLoading(false)
+      })
   }
 
   public fetchRepos = (userName: string = this.state.userName): any => {
@@ -110,7 +112,9 @@ class AppContainer extends Container<IAllCommits> {
           this.fetchCommits(firstRepo.label)
         }
       })
-    this.tiltLoading(false)
+      .finally(() => {
+        this.tiltLoading(false)
+      })
   } 
 
   private tiltLoading = (value: boolean) => {
